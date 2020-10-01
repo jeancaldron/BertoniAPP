@@ -22,8 +22,7 @@ namespace BertoniAPP.BLL.Services
       var albums = response.Select(x => new AlbumViewModel
       {
         Id = x.Id,
-        Title = x.Title,
-        UserId = x.UserId
+        Title = x.Title
       }).ToList();
 
       return albums;

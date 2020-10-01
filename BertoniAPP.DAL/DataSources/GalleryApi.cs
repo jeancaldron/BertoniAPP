@@ -31,13 +31,32 @@ namespace BertoniAPP.Infrastructure.DataSources
       return albums;
     }
 
-    public async Task<List<Photo>> GetPhotosById(int albumId)
+    public async Task<List<Photo>> GetPhotosByAlbumId(int albumId)
+    {
+      var responsePhotos = await httpClient.GetAsync("/photos");
+      var jsonResponsePhotos = await responsePhotos.Content.ReadAsStringAsync();
+      List<Photo> photos = JsonConvert.DeserializeObject<List<Photo>>(jsonResponsePhotos).Where(photo => photo.AlbumId == albumId).ToList();
+      var responseComments = await httpClient.GetAsync("/comments");
+      var jsonResponseComments = await responseComments.Content.ReadAsStringAsync();
+      List<Comment> comments = JsonConvert.DeserializeObject<List<Comment>>(jsonResponseComments).ToList();
+
+      List<Photo> response = new List<Photo>();
+      foreach (var photo in photos)
+      {
+        photo.Comments = comments.Where(y => y.PostId == photo.Id).ToList();
+        response.Add(photo);
+      };
+
+      return response;
+    }
+
+    public async Task<Photo> GetPhotoById(int photoId)
     {
       var response = await httpClient.GetAsync("/photos");
       var jsonResponse = await response.Content.ReadAsStringAsync();
-      List<Photo> photos = JsonConvert.DeserializeObject<List<Photo>>(jsonResponse).Where(photo => photo.AlbumId == albumId).ToList();
+      Photo photo = JsonConvert.DeserializeObject<List<Photo>>(jsonResponse).Where(photo => photo.Id == photoId).FirstOrDefault();
 
-      return photos;
+      return photo;
     }
 
     public async Task<List<Comment>> GetCommentsByPhotoId(int photoId)

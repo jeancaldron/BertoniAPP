@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BertoniAPP.BLL\BertoniAPP.BLL.csproj" />
+    <ProjectReference Include="..\BertoniAPP.DAL\BertoniAPP.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

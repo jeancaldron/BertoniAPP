@@ -6,6 +6,6 @@ namespace BertoniAPP.BLL.Services.Interfaces
 {
   public interface ICommentsService
   {
-    Task<List<CommentViewModel>> GetCommentsById(int photoId);
+    Task<List<CommentViewModel>> GetCommentsByPhotoId(int photoId);
   }
 }

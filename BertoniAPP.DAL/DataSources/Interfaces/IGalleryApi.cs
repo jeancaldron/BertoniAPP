@@ -7,7 +7,8 @@ namespace BertoniAPP.Infrastructure.DataSources.Interfaces
   public interface IGalleryApi
   {
     Task<List<Album>> GetAllAlbums();
-    Task<List<Photo>> GetPhotosById(int albumId);
+    Task<List<Photo>> GetPhotosByAlbumId(int albumId);
+    Task<Photo> GetPhotoById(int photoId);    
     Task<List<Comment>> GetCommentsByPhotoId(int photoId);
     
   }

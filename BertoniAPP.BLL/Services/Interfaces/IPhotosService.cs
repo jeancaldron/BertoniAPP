@@ -6,6 +6,7 @@ namespace BertoniAPP.BLL.Services.Interfaces
 {
   public interface IPhotosService
   {
-    Task<List<PhotoViewModel>> GetPhotosById(int photoId);
+    Task<List<PhotoViewModel>> GetPhotosByAlbumId(int albumId);
+    Task<PhotoViewModel> GetPhotoById(int photoId);
   }
 }

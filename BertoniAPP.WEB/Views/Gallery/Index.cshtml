@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BertoniAPP.BLL.Gallery.ViewModels.AlbumViewModel>
+
+@{
+  ViewData["Title"] = "Albums";
+}
+
+<div class="container">
+  <h5>Albumes</h5>
+
+  <div class="container">
+    <div class="row">
+      @foreach (var item in Model)
+      {
+        <div class="col-sm-4 py-2">
+          <div class="card h-100 border-primary">
+            <div class="card-body">
+              <h3 class="card-title">@Html.DisplayFor(modelItem => item.Id)</h3>
+              <p class="card-text"> @Html.DisplayFor(modelItem => item.Title)</p>
+              <a href="@Url.Action("Photos", "Gallery", new {  id=item.Id })" class="btn btn-outline-secondary">Visualizar Album</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

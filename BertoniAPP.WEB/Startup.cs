@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BertoniAPP.BLL.Services;
+using BertoniAPP.BLL.Services.Interfaces;
+using BertoniAPP.Infrastructure.DataSources;
+using BertoniAPP.Infrastructure.DataSources.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,13 +19,15 @@ namespace BertoniAPP.WEB
 
     public IConfiguration Configuration { get; }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddSingleton<IGalleryApi, GalleryApi>();
+      services.AddSingleton<IAlbumsService, AlbumsService>();
+      services.AddSingleton<IPhotosService, PhotosService>();
+      services.AddSingleton<ICommentsService, CommentsService>();
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if (env.IsDevelopment())
@@ -34,7 +36,7 @@ namespace BertoniAPP.WEB
       }
       else
       {
-        app.UseExceptionHandler("/Home/Error");
+        app.UseExceptionHandler("/Gallery/Error");
       }
       app.UseStaticFiles();
 
@@ -46,7 +48,7 @@ namespace BertoniAPP.WEB
       {
         endpoints.MapControllerRoute(
                   name: "default",
-                  pattern: "{controller=Home}/{action=Index}/{id?}");
+                  pattern: "{controller=Gallery}/{action=Index}/{id?}");
       });
     }
   }

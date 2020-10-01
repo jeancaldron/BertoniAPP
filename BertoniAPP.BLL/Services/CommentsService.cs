@@ -16,7 +16,7 @@ namespace BertoniAPP.BLL.Services
       _galleryApi = galleryApi;
     }
 
-    public async Task<List<CommentViewModel>> GetCommentsById(int photoId)
+    public async Task<List<CommentViewModel>> GetCommentsByPhotoId(int photoId)
     {
       var response = await _galleryApi.GetCommentsByPhotoId(photoId);
       var comments = response.Select(x => new CommentViewModel
